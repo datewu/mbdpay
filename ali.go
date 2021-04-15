@@ -32,7 +32,7 @@ func (r AliReq) toParams() map[string]string {
 	return p
 }
 
-// Alires a alipay response container
+// AliRes a alipay response container
 type AliRes struct {
 	Body  string `json:"body"`
 	Error string `json:"error,omitempty"`

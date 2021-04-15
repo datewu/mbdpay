@@ -12,6 +12,7 @@ const (
 	apiAddress = "https://api.mianbaoduo.com"
 )
 
+// Client is the mbdpay client
 type Client struct {
 	id, key string
 }

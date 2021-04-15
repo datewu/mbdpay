@@ -49,7 +49,7 @@ func (c Client) GetWxOpenID(url string) (string, error) {
 	return "", errors.New(msg)
 }
 
-// WxJs make weixin jsapi call
+// WxJS make weixin jsapi call
 func (c Client) WxJS(req *WxJSReq) (*WxJSRes, error) {
 	const path = "/release/wx/prepay"
 	req.AppID = c.id
@@ -89,7 +89,7 @@ func (r WxH5Req) toParams() map[string]string {
 	return p
 }
 
-// WxH5Req a weixin H5 response container
+// WxH5Res a weixin H5 response container
 type WxH5Res struct {
 	URL   string `json:"h5_url"`
 	Error string `json:"error,omitempty"`
