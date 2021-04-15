@@ -1,9 +1,13 @@
 # mbdpay
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/datewu/mbdpay?style=flat-square)](https://goreportcard.com/report/github.com/datewu/mbdpay)
+[![Godoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://godoc.org/github.com/datewu/mbdpay)
+
 ### description
-A client/sdk for [mbdpay api](https://doc.mbd.pub/)
+A go client/sdk for [mbdpay api](https://doc.mbd.pub/)
 
 ## usage
-import as a normal go package
+Import as a normal go package
 
 ```go
 import pay "github.com/datewu/mbdpay"
@@ -12,6 +16,7 @@ import pay "github.com/datewu/mbdpay"
 
 ### demo
 
+main.go file:
 ```golang
 package main
 
@@ -116,8 +121,7 @@ func searchDemo(cli *pay.Client) {
 }
 
 
-
-
+Runs as:
 ```
 
 ```shell
