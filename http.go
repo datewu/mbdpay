@@ -21,9 +21,8 @@ func postJSON(url string, payload interface{}, p interface{}) error {
 	if err != nil {
 		return err
 	}
+	const ct = "application/json; charset=UTF-8"
 	r := bytes.NewReader(b)
-
-	ct := "application/json; charset=UTF-8"
 	resp, err := http.Post(url, ct, r)
 	if err != nil {
 		return err
