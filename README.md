@@ -3,10 +3,10 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/datewu/mbdpay?style=flat-square)](https://goreportcard.com/report/github.com/datewu/mbdpay)
 [![Godoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://godoc.org/github.com/datewu/mbdpay)
 
-### description
+## Description
 A go client/sdk for [mbdpay api](https://doc.mbd.pub/)
 
-## usage
+## Usage
 Import as a normal go package
 
 ```go
@@ -16,7 +16,7 @@ import pay "github.com/datewu/mbdpay"
 
 ### demo
 
-main.go file:
+`main.go` source:
 ```golang
 package main
 
@@ -41,7 +41,7 @@ func main() {
 }
 
 func wxjsDemo(cli *pay.Client) {
-	const demoOpenid = "orZlx1uViEPNW5B8iTPwgaYLAw-w"
+	demoOpenid := os.Getenv("OPENID")
 	req := &pay.WxJSReq{
 		OpenID:      demoOpenid,
 		Description: "测试jsapi",
@@ -120,12 +120,12 @@ func searchDemo(cli *pay.Client) {
 	fmt.Println(res)
 }
 
-
-Runs as:
 ```
 
+Runs as:
 ```shell
 export APP_ID=your_app_id
 export APP_KEY=your_app_key
+export OPENID=your_weixin_openid  # only needed for wxjsapi method
 go run main.go
 ```
