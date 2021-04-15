@@ -5,6 +5,7 @@ import (
 	"strconv"
 )
 
+// WxJSReq for weixin jsapi request
 type WxJSReq struct {
 	OpenID      string `json:"openid"`
 	AppID       string `json:"app_id"`
@@ -29,6 +30,7 @@ func (r WxJSReq) toParams() map[string]string {
 	return p
 }
 
+// WxJSRes a weixin jsapi response container
 type WxJSRes struct {
 	AppID     string `json:"appId"`
 	TimeStamp string `json:"timeStamp"`
@@ -40,14 +42,15 @@ type WxJSRes struct {
 }
 
 // GetWxOpenID must be implemented on wexin builtin browser
-func (c client) GetWxOpenID(url string) (string, error) {
+func (c Client) GetWxOpenID(url string) (string, error) {
 	// must open in weixin builtin browser
 	// https://mbd.pub/openid?app_id=1234567890&target_url=http://www.example.com/abc?uid=32
 	msg := "cannot implement on server,try using client cookie"
 	return "", errors.New(msg)
 }
 
-func (c client) WxJS(req *WxJSReq) (*WxJSRes, error) {
+// WxJs make weixin jsapi call
+func (c Client) WxJS(req *WxJSReq) (*WxJSRes, error) {
 	const path = "/release/wx/prepay"
 	req.AppID = c.id
 	hashString := c.sign(req.toParams())
@@ -63,6 +66,7 @@ func (c client) WxJS(req *WxJSReq) (*WxJSRes, error) {
 	return res, nil
 }
 
+// WxH5Req for weixin H5 request
 type WxH5Req struct {
 	Channel     string `json:"channel"`
 	AppID       string `json:"app_id"`
@@ -85,12 +89,14 @@ func (r WxH5Req) toParams() map[string]string {
 	return p
 }
 
+// WxH5Req a weixin H5 response container
 type WxH5Res struct {
 	URL   string `json:"h5_url"`
 	Error string `json:"error,omitempty"`
 }
 
-func (c client) WxH5(req *WxH5Req) (*WxH5Res, error) {
+// WxH5 make weixin H5 api call
+func (c Client) WxH5(req *WxH5Req) (*WxH5Res, error) {
 	const path = "/release/wx/prepay"
 	req.Channel = "h5"
 	req.AppID = c.id

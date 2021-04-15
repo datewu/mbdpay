@@ -3,7 +3,7 @@ package mbdpay
 import "fmt"
 
 func ExampleHash() {
-	cli := newClient("abc-id", "xyz-secret-key")
+	cli := New("abc-id", "xyz-secret-key")
 	params := map[string]string{
 		"key1":  "value",
 		"abc":   "xyz",

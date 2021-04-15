@@ -5,6 +5,7 @@ import (
 	"strconv"
 )
 
+// AliReq for alipay request
 type AliReq struct {
 	URL         string `json:"url"`
 	AppID       string `json:"app_id"`
@@ -31,12 +32,14 @@ func (r AliReq) toParams() map[string]string {
 	return p
 }
 
+// Alires a alipay response container
 type AliRes struct {
 	Body  string `json:"body"`
 	Error string `json:"error,omitempty"`
 }
 
-func (c client) AliPay(req *AliReq) (*AliRes, error) {
+// AliPay make alipay api call
+func (c Client) AliPay(req *AliReq) (*AliRes, error) {
 	const path = "/release/alipay/pay"
 	req.AppID = c.id
 	hashString := c.sign(req.toParams())

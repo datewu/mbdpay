@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+// container should be a pointer type
 func getJSON(resp *http.Response, container interface{}) error {
 	if resp.StatusCode > http.StatusPermanentRedirect {
 		return fmt.Errorf("bad http response status: %s", resp.Status)

@@ -4,11 +4,13 @@ import (
 	"errors"
 )
 
+// Webhook for mbd wehhook
 type Webhook struct {
 	Type string      `json:"type"`
 	Data interface{} `json:"data"`
 }
 
+// ChargeHook a charge type webhook handle type
 type ChargeHook struct {
 	Description string `json:"description"`
 	OutTradeNo  string `json:"out_trade_no"`
@@ -18,6 +20,7 @@ type ChargeHook struct {
 	Payway      int    `json:"payway"`
 }
 
+// ComplainHook a complaint type webhook handle type
 type ComplainHook struct {
 	OutTradeNo string `json:"out_trade_no"`
 	Detail     string `json:"complaint_detail"`
@@ -25,6 +28,7 @@ type ComplainHook struct {
 	Phone      string `json:"payer_phone"`
 }
 
+// RefundReq for mbd refund request
 type RefundReq struct {
 	OrderID string `json:"order_id"`
 	AppID   string `json:"app_id"`
@@ -39,6 +43,7 @@ func (r RefundReq) toParams() map[string]string {
 	return p
 }
 
+// RefundRes a refund response container
 type RefundRes struct {
 	// according to docs the code field should be int
 	//	Code  int    `json:"code"`
@@ -47,7 +52,8 @@ type RefundRes struct {
 	Error string `json:"error,omitempty"`
 }
 
-func (c client) Refund(req *RefundReq) (*RefundRes, error) {
+// Refund make refund api call
+func (c Client) Refund(req *RefundReq) (*RefundRes, error) {
 	const path = "/release/main/refund"
 	req.AppID = c.id
 	hashString := c.sign(req.toParams())
@@ -63,6 +69,7 @@ func (c client) Refund(req *RefundReq) (*RefundRes, error) {
 	return res, nil
 }
 
+// SearchReq for search request
 type SearchReq struct {
 	OutTradeNo string `json:"out_trade_no"`
 	AppID      string `json:"app_id"`
@@ -77,6 +84,7 @@ func (r SearchReq) toParams() map[string]string {
 	return p
 }
 
+// SearchRes a search response container
 type SearchRes struct {
 	OrderID      string `json:"order_id"`
 	ChargeID     string `json:"charge_id"`
@@ -92,7 +100,8 @@ type SearchRes struct {
 	Error        string `json:"error,omitempty"`
 }
 
-func (c client) Search(req *SearchReq) (*SearchRes, error) {
+// Search make search api call
+func (c Client) Search(req *SearchReq) (*SearchRes, error) {
 	const path = "/release/main/search_order"
 	req.AppID = c.id
 	hashString := c.sign(req.toParams())

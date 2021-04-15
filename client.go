@@ -12,18 +12,19 @@ const (
 	apiAddress = "https://api.mianbaoduo.com"
 )
 
-type client struct {
+type Client struct {
 	id, key string
 }
 
-func newClient(id, key string) *client {
-	c := new(client)
+// New make a new Client
+func New(id, key string) *Client {
+	c := new(Client)
 	c.id = id
 	c.key = key
 	return c
 }
 
-func (c client) sign(params map[string]string) string {
+func (c Client) sign(params map[string]string) string {
 	keys := make([]string, len(params))
 	i := 0
 	for k := range params {
