@@ -10,7 +10,6 @@ type Webhook struct {
 	Data dataWrap `json:"data"`
 }
 
-// ToCharge when type == 'charge_succeeded'
 func (w Webhook) ToCharge() *ChargeHook {
 	c := &ChargeHook{
 		Description: w.Data.Description,
@@ -24,7 +23,6 @@ func (w Webhook) ToCharge() *ChargeHook {
 
 }
 
-// ToComplain when type == 'complaint'
 func (w Webhook) ToComplain() *ComplainHook {
 	c := &ComplainHook{
 		OutTradeNo: w.Data.OutTradeNo,
