@@ -129,3 +129,28 @@ export APP_KEY=your_app_key
 export OPENID=your_weixin_openid  # only needed for wxjsapi method
 go run main.go
 ```
+
+#### About WebHook
+Remeber to Concrete the WebHook type, like below:
+```golang
+
+// .... snip ...
+func (Cb) Mbd(c *gin.Context) {
+	req := &pay.Webhook{}
+	if err := c.ShouldBind(req); err != nil {
+		log.Error().Err(err).
+			Msg("bind mbd cb failed")
+		return
+	}
+	charge, complain := req.Concrete()
+	if charge != nil {
+		//	handleCharge(charge)
+	}
+	if complain != nil {
+        //  handleComplain(complain)
+	}
+
+// .... snip ...
+}
+
+```

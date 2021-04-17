@@ -10,30 +10,29 @@ type Webhook struct {
 	Data dataWrap `json:"data"`
 }
 
-// ToCharge when type == 'charge_succeeded'
-func (w Webhook) ToCharge() *ChargeHook {
-	c := &ChargeHook{
-		Description: w.Data.Description,
-		OutTradeNo:  w.Data.OutTradeNo,
-		Amount:      w.Data.Amount,
-		OpenID:      w.Data.OpenID,
-		ChargeID:    w.Data.ChargeID,
-		Payway:      w.Data.Payway,
+// Concrete to charge or complain hook
+func (w Webhook) Concrete() (*ChargeHook, *ComplainHook) {
+	switch w.Type {
+	case "charge_succeeded":
+		c := &ChargeHook{
+			Description: w.Data.Description,
+			OutTradeNo:  w.Data.OutTradeNo,
+			Amount:      w.Data.Amount,
+			OpenID:      w.Data.OpenID,
+			ChargeID:    w.Data.ChargeID,
+			Payway:      w.Data.Payway,
+		}
+		return c, nil
+	case "complaint":
+		c := &ComplainHook{
+			OutTradeNo: w.Data.OutTradeNo,
+			Detail:     w.Data.Detail,
+			Amount:     w.Data.Amount,
+			Phone:      w.Data.Phone,
+		}
+		return nil, c
 	}
-	return c
-
-}
-
-// ToComplain when type == 'complaint'
-func (w Webhook) ToComplain() *ComplainHook {
-	c := &ComplainHook{
-		OutTradeNo: w.Data.OutTradeNo,
-		Detail:     w.Data.Detail,
-		Amount:     w.Data.Amount,
-		Phone:      w.Data.Phone,
-	}
-	return c
-
+	return nil, nil
 }
 
 type dataWrap struct {
