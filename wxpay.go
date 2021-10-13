@@ -2,7 +2,10 @@ package mbdpay
 
 import (
 	"errors"
+	"net/http"
 	"strconv"
+
+	"github.com/datewu/fetch"
 )
 
 // WxJSReq for weixin jsapi request
@@ -56,7 +59,8 @@ func (c Client) WxJS(req *WxJSReq) (*WxJSRes, error) {
 	hashString := c.sign(req.toParams())
 	req.Sign = hashString
 	res := new(WxJSRes)
-	err := postJSON(apiAddress+path, req, res)
+	cli := fetch.DefaultClient()
+	err := cli.CreatJSON(http.MethodPost, apiAddress+path, req, res)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +107,8 @@ func (c Client) WxH5(req *WxH5Req) (*WxH5Res, error) {
 	hashString := c.sign(req.toParams())
 	req.Sign = hashString
 	res := new(WxH5Res)
-	err := postJSON(apiAddress+path, req, res)
+	cli := fetch.DefaultClient()
+	err := cli.CreatJSON(http.MethodPost, apiAddress+path, req, res)
 	if err != nil {
 		return nil, err
 	}

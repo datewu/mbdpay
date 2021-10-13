@@ -2,7 +2,10 @@ package mbdpay
 
 import (
 	"errors"
+	"net/http"
 	"strconv"
+
+	"github.com/datewu/fetch"
 )
 
 // AliReq for alipay request
@@ -45,7 +48,8 @@ func (c Client) AliPay(req *AliReq) (*AliRes, error) {
 	hashString := c.sign(req.toParams())
 	req.Sign = hashString
 	res := new(AliRes)
-	err := postJSON(apiAddress+path, req, res)
+	cli := fetch.DefaultClient()
+	err := cli.CreatJSON(http.MethodPost, apiAddress+path, req, res)
 	if err != nil {
 		return nil, err
 	}

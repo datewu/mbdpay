@@ -2,6 +2,9 @@ package mbdpay
 
 import (
 	"errors"
+	"net/http"
+
+	"github.com/datewu/fetch"
 )
 
 // Webhook for mbd wehhook
@@ -98,7 +101,8 @@ func (c Client) Refund(req *RefundReq) (*RefundRes, error) {
 	hashString := c.sign(req.toParams())
 	req.Sign = hashString
 	res := new(RefundRes)
-	err := postJSON(apiAddress+path, req, res)
+	cli := fetch.DefaultClient()
+	err := cli.CreatJSON(http.MethodPost, apiAddress+path, req, res)
 	if err != nil {
 		return nil, err
 	}
@@ -146,7 +150,8 @@ func (c Client) Search(req *SearchReq) (*SearchRes, error) {
 	hashString := c.sign(req.toParams())
 	req.Sign = hashString
 	res := new(SearchRes)
-	err := postJSON(apiAddress+path, req, res)
+	cli := fetch.DefaultClient()
+	err := cli.CreatJSON(http.MethodPost, apiAddress+path, req, res)
 	if err != nil {
 		return nil, err
 	}
