@@ -3,7 +3,7 @@ module github.com/datewu/mbdpay
 go 1.17
 
 require (
-	github.com/datewu/fetch v0.0.1
+	github.com/datewu/fetch v0.0.4
 	github.com/datewu/security v0.1.8
 )
 

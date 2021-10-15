@@ -1,8 +1,8 @@
 package mbdpay
 
 import (
+	"context"
 	"errors"
-	"net/http"
 
 	"github.com/datewu/fetch"
 )
@@ -101,8 +101,8 @@ func (c Client) Refund(req *RefundReq) (*RefundRes, error) {
 	hashString := c.sign(req.toParams())
 	req.Sign = hashString
 	res := new(RefundRes)
-	cli := fetch.DefaultClient()
-	err := cli.CreatJSON(http.MethodPost, apiAddress+path, req, res)
+	cli := fetch.DefaultClient(context.Background())
+	err := cli.Post(apiAddress+path, req, res)
 	if err != nil {
 		return nil, err
 	}
@@ -150,8 +150,8 @@ func (c Client) Search(req *SearchReq) (*SearchRes, error) {
 	hashString := c.sign(req.toParams())
 	req.Sign = hashString
 	res := new(SearchRes)
-	cli := fetch.DefaultClient()
-	err := cli.CreatJSON(http.MethodPost, apiAddress+path, req, res)
+	cli := fetch.DefaultClient(context.Background())
+	err := cli.Post(apiAddress+path, req, res)
 	if err != nil {
 		return nil, err
 	}

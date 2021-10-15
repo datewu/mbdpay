@@ -1,8 +1,8 @@
 package mbdpay
 
 import (
+	"context"
 	"errors"
-	"net/http"
 	"strconv"
 
 	"github.com/datewu/fetch"
@@ -59,8 +59,8 @@ func (c Client) WxJS(req *WxJSReq) (*WxJSRes, error) {
 	hashString := c.sign(req.toParams())
 	req.Sign = hashString
 	res := new(WxJSRes)
-	cli := fetch.DefaultClient()
-	err := cli.CreatJSON(http.MethodPost, apiAddress+path, req, res)
+	cli := fetch.DefaultClient(context.Background())
+	err := cli.Post(apiAddress+path, req, res)
 	if err != nil {
 		return nil, err
 	}
@@ -107,8 +107,8 @@ func (c Client) WxH5(req *WxH5Req) (*WxH5Res, error) {
 	hashString := c.sign(req.toParams())
 	req.Sign = hashString
 	res := new(WxH5Res)
-	cli := fetch.DefaultClient()
-	err := cli.CreatJSON(http.MethodPost, apiAddress+path, req, res)
+	cli := fetch.DefaultClient(context.Background())
+	err := cli.Post(apiAddress+path, req, res)
 	if err != nil {
 		return nil, err
 	}

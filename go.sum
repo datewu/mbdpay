@@ -1,5 +1,5 @@
-github.com/datewu/fetch v0.0.1 h1:4RpN3goNqgErGpP2Kqouc9wLmtEQuOauuXI0x9iDbhE=
-github.com/datewu/fetch v0.0.1/go.mod h1:cihkhMYPhFxj+qL49eSa4Ju6MewzJAl61ElahRPihPA=
+github.com/datewu/fetch v0.0.4 h1:gZFw72sUsjNC7xMANIK9SjSwI0iNbzQ7NQ1ZzdXl/e0=
+github.com/datewu/fetch v0.0.4/go.mod h1:cihkhMYPhFxj+qL49eSa4Ju6MewzJAl61ElahRPihPA=
 github.com/datewu/security v0.1.8 h1:RtnWCddX8ygRdWIUNwvHHEMCJLScvwp7SXfkyZGFd0k=
 github.com/datewu/security v0.1.8/go.mod h1:n3Lq81Y1DoV4WcyKgfMZ80EnzkhfoGG0XbL6hyYWR4I=
 golang.org/x/crypto v0.0.0-20210817164053-32db794688a5/go.mod h1:GvvjBRRGRdwPK5ydBHafDWAxML/pGHZbMvKqRZ5+Abc=
